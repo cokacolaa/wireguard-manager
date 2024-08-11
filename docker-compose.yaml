@@ -1,0 +1,26 @@
+version: "2.1"
+services:
+  wireguard:
+    container_name: wg-manager
+    image: andromeda9096/wireguardserver-ui:v1
+    restart: always
+    #sysctls:
+      #net.ipv6.conf.all.disable_ipv6: 0  # Required for IPV6
+    cap_add:
+      - NET_ADMIN
+    network_mode: host # Alternatively
+    ports:
+       - 51820:51820/udp
+       - 8888:8888
+    volumes:
+      - wg-manager:/config
+    environment:
+      TZ: Asia/Ho_Chi_Minh
+      HOST: 0.0.0.0
+      PORT: 8888
+      ADMIN_PASSWORD: y0urpassw0rd
+      ADMIN_USERNAME: admin
+      WEB_CONCURRENCY: 1
+volumes:
+  wg-manager:
+    driver: local
