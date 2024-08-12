@@ -1,9 +1,7 @@
 # wireguard-Server with UI docker-compose
 ### Install
 ```
-git clone https://github.com/dylansys/wireguard-manager.git
-cd ./wireguard-manager
-docker-compose up -d 
+git clone https://github.com/dylansys/wireguard-manager.git && cd ./wireguard-manager && sudo docker-compose up -d 
 ```
 
 ### Login
