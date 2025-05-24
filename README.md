@@ -10,6 +10,8 @@ Login http://ip_host:5000
 - Port forwarding: 51820/UDP on UI
 - user: admin
 - pass: admin
+- Post Up Script: iptables -A FORWARD -i %1 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth+ -j MASQUERADE
+- Post Down Script: iptables -D FORWARD -i %1 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth+ -j MASQUERADE
   ![image](https://github.com/user-attachments/assets/48eb44be-ffd5-487a-88a1-e0254a4d63be)
 ## Config file template to change port listen endpoint
 ```
