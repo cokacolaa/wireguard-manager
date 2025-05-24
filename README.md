@@ -5,8 +5,26 @@ git clone https://github.com/cokacolaa/wireguard-manager.git && cd ./wireguard-m
 ```
 
 ### Login
-Login http://ip_host:8888
+Login http://ip_host:5000
 
-- Port forwarding : 51820/UDP on firewall
+- Port forwarding: 51820/UDP on UI
 - user: admin
-- pass: y0urpassw0rd (change in docker-compose.yaml)
+- pass: admin
+  ![image](https://github.com/user-attachments/assets/48eb44be-ffd5-487a-88a1-e0254a4d63be)
+## Config file template to change port listen endpoint
+```
+vi ./config/template/peer.conf
+```
+```
+[Interface]
+Address = ${CLIENT_IP}
+PrivateKey = $(cat /config/${PEER_ID}/privatekey-${PEER_ID})
+ListenPort = 51820
+DNS = ${PEERDNS}
+
+[Peer]
+PublicKey = $(cat /config/server/publickey-server)
+PresharedKey = $(cat /config/${PEER_ID}/presharedkey-${PEER_ID})
+# Change endpoint = ${WGUI_ENDPOINT_ADDRESS}
+Endpoint = ${WGUI_ENDPOINT_ADDRESS}
+AllowedIPs = ${ALLOWEDIPS}```
